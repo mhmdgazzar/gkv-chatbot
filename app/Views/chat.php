@@ -7,6 +7,9 @@
 <meta name="description" content="Digitaler Ratgeber zur gesetzlichen Krankenversicherung (GKV) in Deutschland. Fragen zu Leistungen, Beiträgen, Mitgliedschaft und Pflege.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
+<?php if (env('UMAMI_SCRIPT_URL')): ?>
+<script defer src="<?= env('UMAMI_SCRIPT_URL') ?>" data-website-id="<?= env('UMAMI_WEBSITE_ID') ?>"></script>
+<?php endif; ?>
 <style>
   :root {
     --bg: #ffffff;
