@@ -6,6 +6,7 @@
 <title>GKV Assistent — Ihr Ratgeber zur gesetzlichen Krankenversicherung</title>
 <meta name="description" content="Digitaler Ratgeber zur gesetzlichen Krankenversicherung (GKV) in Deutschland. Fragen zu Leistungen, Beiträgen, Mitgliedschaft und Pflege.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
 <style>
   :root {
     --bg: #ffffff;
@@ -315,12 +316,24 @@
   .test-banner {
     background: var(--fg);
     color: var(--bg);
-    text-align: center;
     font-size: 11px;
     padding: 4px 12px;
     letter-spacing: 0.02em;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
   }
+
+  .test-banner a {
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    opacity: 0.7;
+    transition: opacity 0.15s;
+  }
+  .test-banner a:hover { opacity: 1; }
 
   .error-banner {
     display: none;
@@ -335,7 +348,12 @@
 </head>
 <body>
 
-<div class="test-banner">⚠ Diese Webseite dient ausschließlich zu Testzwecken.</div>
+<div class="test-banner">
+  <span>⚠ Diese Webseite dient ausschließlich zu Testzwecken.</span>
+  <a href="https://github.com/mhmdgazzar/gkv-chatbot" target="_blank" rel="noopener" title="GitHub Repository">
+    <i class="ph ph-github-logo" style="font-size: 16px;"></i>
+  </a>
+</div>
 <div class="error-banner" id="errorBanner"></div>
 
 <header>
@@ -387,7 +405,7 @@
   </div>
 </div>
 
-<footer>GKV Assistent · Alle Angaben ohne Gewähr</footer>
+<footer>GKV Assistent · Alle Angaben ohne Gewähr · <a href="https://github.com/mhmdgazzar/gkv-chatbot" target="_blank" rel="noopener" title="GitHub Repository" style="color:var(--muted);transition:color 0.15s;"><i class="ph ph-github-logo" style="font-size:13px;vertical-align:-1px;"></i></a></footer>
 
 <script>
 const chatArea = document.getElementById('chatArea');

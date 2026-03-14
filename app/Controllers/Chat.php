@@ -42,6 +42,29 @@ PROMPT;
                 ->setJSON(['error' => 'Keine Nachricht erhalten.']);
         }
 
+        // ─── Rate Limiting: 10 requests per minute per IP ───
+        $ip = $this->request->getIPAddress();
+        $rateLimitFile = WRITEPATH . 'cache/rate_' . md5($ip) . '.json';
+        $maxRequests = 10;
+        $windowSeconds = 60;
+        $now = time();
+
+        $requests = [];
+        if (file_exists($rateLimitFile)) {
+            $requests = json_decode(file_get_contents($rateLimitFile), true) ?: [];
+            // Keep only requests within the current window
+            $requests = array_values(array_filter($requests, fn($t) => $t > $now - $windowSeconds));
+        }
+
+        if (count($requests) >= $maxRequests) {
+            return $this->response
+                ->setStatusCode(429)
+                ->setJSON(['error' => 'Zu viele Anfragen. Bitte warten Sie eine Minute.']);
+        }
+
+        $requests[] = $now;
+        file_put_contents($rateLimitFile, json_encode($requests));
+
         // Select relevant knowledge context
         $wissenBank = new WissenBank();
         $ctx = $wissenBank->selectContext($userMessage);
